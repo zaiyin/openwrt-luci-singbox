@@ -1,0 +1,17 @@
+<%+
+local running = luci.sys.call("pgrep sing-box >/dev/null") == 0
+%>
+<h1>Sing-Box Control Panel</h1>
+<p>Current Status: <strong><%= running and "Running" or "Stopped" %></strong></p>
+
+<form method="post" action="<%= luci.dispatcher.build_url("admin", "services", "singbox", "start") %>">
+    <button type="submit" class="cbi-button cbi-button-apply">Start</button>
+</form>
+
+<form method="post" action="<%= luci.dispatcher.build_url("admin", "services", "singbox", "stop") %>">
+    <button type="submit" class="cbi-button cbi-button-remove">Stop</button>
+</form>
+
+<form method="post" action="<%= luci.dispatcher.build_url("admin", "services", "singbox", "restart") %>">
+    <button type="submit" class="cbi-button cbi-button-reload">Restart</button>
+</form>
